@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class UserApplication {
 
@@ -61,7 +62,34 @@ public class UserApplication {
 		//if the username/password combination (not case sensitive for username) of any of the users
 		//in the Users[], then that user is assigned as the current user and the program terminates
 		
+		Scanner scanner = new Scanner(System.in);
 		
+		User CurrentUser = null;
+		
+		boolean matchingUser = false;
+		
+		for( int j = 0; j < 5; j++) {
+			if (matchingUser) {
+				j = 9000;
+				break;
+			} else if (!matchingUser) {
+				
+				System.out.println("Enter your email: ");
+				String allegedUsername = scanner.nextLine();
+				System.out.println("Enter you password: ");
+				String allegedPassword = scanner.nextLine();
+				
+				for (User user: Users) {
+					if (user.username == allegedUsername && user.password == allegedPassword) {
+						matchingUser = true;
+						CurrentUser = user;
+						break;
+					}
+				}
+			}
+		}
+		
+		CurrentUser.getProperties();
 	}
 
 }
