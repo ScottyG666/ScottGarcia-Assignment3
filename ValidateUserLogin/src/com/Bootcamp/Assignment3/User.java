@@ -11,6 +11,10 @@ public class User {
 		this.user = inputs[2];
 	}
 	
+	User () {
+		
+	}
+	
 	public void getProperties() {
 		System.out.println(this.username + "\n" + this.password + "\n" + this.user);
 	}

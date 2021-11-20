@@ -21,7 +21,6 @@ public class UserApplication {
 		//User Array for storing the 4 users in our data.txt sheet now
 		User[] Users = new User[4];
 		
-		
 		//Initial try block to read the file line by line, parse that line into String[]
 		//used to create new users, and assign those users to a spot in the Users[]
 		try {
@@ -51,45 +50,45 @@ public class UserApplication {
 			}
 		}
 		
-		for (User user : Users) {
-			user.getProperties();
-		}
 		
-		
-		//here ill validate the Username/password combination the user input matched a combination 
-		// pre-existing in the CSV file provided
-		
-		//if the username/password combination (not case sensitive for username) of any of the users
-		//in the Users[], then that user is assigned as the current user and the program terminates
-		
+		//this variable sets the amount of times a user may try to log in before it terminates if the 
+		//username password combination doesn't match
+		final int ALLOWED_LOG_IN_ATTEMPTS = 5;
+		boolean matching = false;
+		User CurrentUser = new User();
+		String allegedUsername = new String();
+		String allegedPassword = new String();
 		Scanner scanner = new Scanner(System.in);
 		
-		User CurrentUser = null;
-		
-		boolean matchingUser = false;
-		
-		for( int j = 0; j < 5; j++) {
-			if (matchingUser) {
-				j = 9000;
-				break;
-			} else if (!matchingUser) {
+		try {
+				//allows only 5 Attempts to log in
+			for (int j = 0; j < ALLOWED_LOG_IN_ATTEMPTS; j++) {
 				
-				System.out.println("Enter your email: ");
-				String allegedUsername = scanner.nextLine();
-				System.out.println("Enter you password: ");
-				String allegedPassword = scanner.nextLine();
+				if (!matching) {
+					
+					System.out.println("Enter your email: ");
+					allegedUsername = scanner.nextLine().toLowerCase();
+					System.out.println("Enter you password: ");
+					allegedPassword = scanner.nextLine();
 				
-				for (User user: Users) {
-					if (user.username == allegedUsername && user.password == allegedPassword) {
-						matchingUser = true;
+			}
+				for (User user : Users) {
+
+					if (allegedUsername.equals(allegedUsername) && allegedPassword.equals(allegedPassword)) {
+						j = ALLOWED_LOG_IN_ATTEMPTS;
+						System.out.println(CurrentUser);
 						CurrentUser = user;
-						break;
-					}
+						System.out.println(CurrentUser);
 				}
 			}
+				
+			
+				
 		}
 		
-		CurrentUser.getProperties();
+	} finally {
+		scanner.close();
+	}
 	}
 
 }
